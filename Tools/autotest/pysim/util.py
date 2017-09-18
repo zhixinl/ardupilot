@@ -257,6 +257,8 @@ def start_MAVProxy_SITL(atype, aircraft=None, setup=False, master='tcp:127.0.0.1
     if aircraft is None:
         aircraft = 'test.%s' % atype
     cmd += ' --aircraft=%s' % aircraft
+    cmd += ' --load-module falconhil'
+    
     if options is not None:
         cmd += ' ' + options
     ret = pexpect.spawn(cmd, logfile=logfile, encoding=ENCODING, timeout=60)
