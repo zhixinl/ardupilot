@@ -1033,25 +1033,25 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     print("# ########################### enter fly_falcon..")
 
     home = "%f,%f,%u,%u" % (HOME.lat, HOME.lng, HOME.alt, HOME.heading)
-    sitl = util.start_SITL(binary, wipe=True, model=frame, home=home, speedup=speedup)
-    mavproxy = util.start_MAVProxy_SITL('ArduCopter', options='--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --quadcopter')
-    mavproxy.expect('Received [0-9]+ parameters')
-
-    # setup test parameters
-    if params is None:
-        params = vinfo.options["ArduCopter"]["frames"][frame]["default_params_filename"]
-    if not isinstance(params, list):
-        params = [params]
-    for x in params:
-        mavproxy.send("param load %s\n" % os.path.join(testdir, x))
-        mavproxy.expect('Loaded [0-9]+ parameters')
-    mavproxy.send("param set LOG_REPLAY 1\n")
-    mavproxy.send("param set LOG_DISARMED 1\n")
-    time.sleep(3)
-
-    # reboot with new parameters
-    util.pexpect_close(mavproxy)
-    util.pexpect_close(sitl)
+    # sitl = util.start_SITL(binary, wipe=True, model=frame, home=home, speedup=speedup)
+    # mavproxy = util.start_MAVProxy_SITL('ArduCopter', options='--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --quadcopter')
+    # mavproxy.expect('Received [0-9]+ parameters')
+    # 
+    # # setup test parameters
+    # if params is None:
+    #     params = vinfo.options["ArduCopter"]["frames"][frame]["default_params_filename"]
+    # if not isinstance(params, list):
+    #     params = [params]
+    # for x in params:
+    #     mavproxy.send("param load %s\n" % os.path.join(testdir, x))
+    #     mavproxy.expect('Loaded [0-9]+ parameters')
+    # mavproxy.send("param set LOG_REPLAY 1\n")
+    # mavproxy.send("param set LOG_DISARMED 1\n")
+    # time.sleep(3)
+    # 
+    # # reboot with new parameters
+    # util.pexpect_close(mavproxy)
+    # util.pexpect_close(sitl)
 
     sitl = util.start_SITL(binary, model=frame, home=home, speedup=speedup, valgrind=valgrind, gdb=gdb, gdbserver=gdbserver)
     options = '--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --quadcopter --streamrate=5'
@@ -1096,9 +1096,11 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     failed = False
     failed_test_msg = "None"
 
+    # Enable MAVProxy debugging
+    mavproxy.send("set moddebug 3\n")
+
     try:
         print("# ########################### fly_falcon try...")
-        time.sleep(2)
 
         mav.wait_heartbeat()
         setup_rc(mavproxy)
@@ -1108,216 +1110,10 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
 
         # Arm
         print("######################## Arm motors")
-        time.sleep(2)
         if not arm_motors(mavproxy, mav):
             failed_test_msg = "arm_motors failed"
             print(failed_test_msg)
             failed = True
-
-        # print("######################## Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Fly a square in Stabilize mode
-        # print("#")
-        # print("########## Fly a square and save WPs with CH7 switch ##########")
-        # print("#")
-        # if not fly_square(mavproxy, mav):
-        #     failed_test_msg = "fly_square failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # save the stored mission to file
-        # print("# Save out the CH7 mission to file")
-        # if not save_mission_to_file(mavproxy, mav, os.path.join(testdir, "ch7_mission.txt")):
-        #     failed_test_msg = "save_mission_to_file failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # fly the stored mission
-        # print("# Fly CH7 saved mission")
-        # if not fly_mission(mavproxy, mav, height_accuracy=0.5, target_altitude=10):
-        #     failed_test_msg = "fly ch7_mission failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Throttle Failsafe
-        # print("#")
-        # print("########## Test Failsafe ##########")
-        # print("#")
-        # if not fly_throttle_failsafe(mavproxy, mav):
-        #     failed_test_msg = "fly_throttle_failsafe failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Battery failsafe
-        # if not fly_battery_failsafe(mavproxy, mav):
-        #     failed_test_msg = "fly_battery_failsafe failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Stability patch
-        # print("#")
-        # print("########## Test Stability Patch ##########")
-        # print("#")
-        # if not fly_stability_patch(mavproxy, mav, 30):
-        #     failed_test_msg = "fly_stability_patch failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL
-        # print("# RTL #")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL after stab patch failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Fence test
-        # print("#")
-        # print("########## Test Horizontal Fence ##########")
-        # print("#")
-        # if not fly_fence_test(mavproxy, mav, 180):
-        #     failed_test_msg = "fly_fence_test failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Fly GPS Glitch Loiter test
-        # print("# GPS Glitch Loiter Test")
-        # if not fly_gps_glitch_loiter_test(mavproxy, mav, use_map):
-        #     failed_test_msg = "fly_gps_glitch_loiter_test failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL after GPS Glitch Loiter test
-        # print("# RTL #")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Fly GPS Glitch test in auto mode
-        # print("# GPS Glitch Auto Test")
-        # if not fly_gps_glitch_auto_test(mavproxy, mav, use_map):
-        #     failed_test_msg = "fly_gps_glitch_auto_test failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # take-off ahead of next test
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Loiter for 10 seconds
-        # print("#")
-        # print("########## Test Loiter for 10 seconds ##########")
-        # print("#")
-        # if not loiter(mavproxy, mav):
-        #     failed_test_msg = "loiter failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Loiter Climb
-        # print("#")
-        # print("# Loiter - climb to 30m")
-        # print("#")
-        # if not change_alt(mavproxy, mav, 30):
-        #     failed_test_msg = "change_alt climb failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Loiter Descend
-        # print("#")
-        # print("# Loiter - descend to 20m")
-        # print("#")
-        # if not change_alt(mavproxy, mav, 20):
-        #     failed_test_msg = "change_alt descend failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL
-        # print("#")
-        # print("########## Test RTL ##########")
-        # print("#")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL after Loiter climb/descend failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Simple mode
-        # print("# Fly in SIMPLE mode")
-        # if not fly_simple(mavproxy, mav):
-        #     failed_test_msg = "fly_simple failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL
-        # print("#")
-        # print("########## Test RTL ##########")
-        # print("#")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL after simple mode failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Fly a circle in super simple mode
-        # print("# Fly a circle in SUPER SIMPLE mode")
-        # if not fly_super_simple(mavproxy, mav):
-        #     failed_test_msg = "fly_super_simple failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL
-        # print("# RTL #")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL after super simple mode failed"
-        #     print(failed_test_msg)
-        #     failed = True
 
         # Takeoff
         print("# Takeoff")
@@ -1326,45 +1122,7 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
             print(failed_test_msg)
             failed = True
 
-        # Circle mode
-        # print("# Fly CIRCLE mode")
-        # if not fly_circle(mavproxy, mav):
-        #     failed_test_msg = "fly_circle failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # RTL
-        # print("#")
-        # print("########## Test RTL ##########")
-        # print("#")
-        # if not fly_RTL(mavproxy, mav):
-        #     failed_test_msg = "fly_RTL after circle failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # print("######## Fly copter mission")
-        # if not fly_auto_test(mavproxy, mav):
-        #     failed_test_msg = "fly_auto_test failed"
-        #     print(failed_test_msg)
-        #     failed = True
-        # else:
-        #     print("Flew copter mission OK")
-
-        # print("# ########################### call falcon command..")
-        # time.sleep(1)
-        # #mavproxy.send('wp set 1\n')
-        # mavproxy.send('falcon readsystem\n')
-        # mavproxy.send("falcon status\n")
-        # time.sleep(3)
-
-        # set throttle to minimum
-        # mavproxy.send('rc 3 1000\n')
-
-        # # wait for disarm
-        # mav.motors_disarmed_wait()
-        # print("MOTORS DISARMED OK")
-
-
+        # Falcon test
         print("######## Fly falcon mission now")
         if not fly_falcon_test(mavproxy, mav):
             failed_test_msg = "fly_falcon_test failed"
@@ -1372,7 +1130,6 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
             failed = True
         else:
             print("fly_falcon_test OK")
-
 
         # wait for disarm
         mav.motors_disarmed_wait()  # This is important, or falcon module will not print log output
