@@ -253,7 +253,7 @@ def run_step(step):
 
     if step == 'fly.ArduCopter':
         # return arducopter.fly_ArduCopter(binary, frame=opts.frame, **fly_opts)
-        return falconcopter.fly_ArduCopter(binary, frame=opts.frame, **fly_opts)
+        return falconcopter.fly_Falcon(binary, frame=opts.frame, **fly_opts)
 
     # if step == 'fly.CopterAVC':
     #     return arducopter.fly_CopterAVC(binary, **fly_opts)
