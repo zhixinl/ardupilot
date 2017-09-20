@@ -179,6 +179,9 @@ __bin_names = {
 }
 
 def binary_path(step, debug=False):
+    if step == 'convertgpx':
+        return None
+
     vehicle = step.split(".")[1]
 
     if vehicle in __bin_names:
@@ -285,8 +288,8 @@ def run_step(step):
     # if step == 'build.Parameters':
     #     return build_parameters()
 
-    # if step == 'convertgpx':
-    #     return convert_gpx()
+    if step == 'convertgpx':
+        return convert_gpx()
 
     raise RuntimeError("Unknown step %s" % step)
 
