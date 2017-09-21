@@ -551,6 +551,7 @@ def start_mavproxy(opts, stuff):
     if opts.mavproxy_args:
         cmd.extend(opts.mavproxy_args.split(" "))  # this could be a lot better..
 
+    cmd.extend(["--load-module", "falconhil"])
     # compatibility pass-through parameters (for those that don't want
     # to use -C :-)
     for out in opts.out:
