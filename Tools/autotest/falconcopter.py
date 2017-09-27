@@ -875,41 +875,6 @@ def fly_auto_test(mavproxy, mav):
     return ret
 
 
-# fly_avc_test - fly AVC mission
-def fly_avc_test(mavproxy, mav):
-
-    # upload mission from file
-    print("# Load copter_AVC2013_mission")
-    if not load_mission_from_file(mavproxy, mav, os.path.join(testdir, "copter_AVC2013_mission.txt")):
-        print("load copter_AVC2013_mission failed")
-        return False
-
-    # load the waypoint count
-    global homeloc
-    global num_wp
-    print("Fly AVC mission from 1 to %u" % num_wp)
-    mavproxy.send('wp set 1\n')
-
-    # switch into AUTO mode and raise throttle
-    mavproxy.send('switch 4\n')  # auto mode
-    wait_mode(mav, 'AUTO')
-    mavproxy.send('rc 3 1500\n')
-
-    # fly the mission
-    ret = wait_waypoint(mav, 0, num_wp-1, timeout=500)
-
-    # set throttle to minimum
-    mavproxy.send('rc 3 1000\n')
-
-    # wait for disarm
-    mav.motors_disarmed_wait()
-    print("MOTORS DISARMED OK")
-
-    print("AVC mission completed: passed=%s" % ret)
-
-    return ret
-
-
 def land(mavproxy, mav, timeout=60):
     """Land the quad."""
     print("STARTING LANDING")
@@ -1064,7 +1029,7 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     logfile = mavproxy.match.group(1)
     print("LOGFILE %s" % logfile)
 
-    buildlog = util.reltopdir("../buildlogs/ArduCopter-test.tlog")
+    buildlog = util.reltopdir("../buildlogs/falcon-test.tlog")
     print("buildlog=%s" % buildlog)
     copy_tlog = False
     if os.path.exists(buildlog):
@@ -1165,131 +1130,3 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
         return False
     return True
 
-
-def fly_CopterAVC(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, frame=None, params=None, gdbserver=False, speedup=10):
-    """Fly ArduCopter in SITL for AVC2013 mission."""
-    global homeloc
-
-    if frame is None:
-        frame = 'heli'
-
-    home = "%f,%f,%u,%u" % (AVCHOME.lat, AVCHOME.lng, AVCHOME.alt, AVCHOME.heading)
-    sitl = util.start_SITL(binary, wipe=True, model=frame, home=home, speedup=speedup)
-    mavproxy = util.start_MAVProxy_SITL('ArduCopter', options='--sitl=127.0.0.1:5501 --out=127.0.0.1:19550')
-    mavproxy.expect('Received [0-9]+ parameters')
-
-    # setup test parameters
-    if params is None:
-        params = vinfo.options["ArduCopter"]["frames"][frame]["default_params_filename"]
-    if not isinstance(params, list):
-        params = [params]
-    for x in params:
-        mavproxy.send("param load %s\n" % os.path.join(testdir, x))
-        mavproxy.expect('Loaded [0-9]+ parameters')
-    mavproxy.send("param set LOG_REPLAY 1\n")
-    mavproxy.send("param set LOG_DISARMED 1\n")
-    time.sleep(3)
-
-    # reboot with new parameters
-    util.pexpect_close(mavproxy)
-    util.pexpect_close(sitl)
-
-    sitl = util.start_SITL(binary, model='heli', home=home, speedup=speedup, valgrind=valgrind, gdb=gdb, gdbserver=gdbserver)
-    options = '--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --streamrate=5'
-    if viewerip:
-        options += ' --out=%s:14550' % viewerip
-    if use_map:
-        options += ' --map'
-    mavproxy = util.start_MAVProxy_SITL('ArduCopter', options=options)
-    mavproxy.expect('Telemetry log: (\S+)')
-    logfile = mavproxy.match.group(1)
-    print("LOGFILE %s" % logfile)
-
-    buildlog = util.reltopdir("../buildlogs/CopterAVC-test.tlog")
-    print("buildlog=%s" % buildlog)
-    if os.path.exists(buildlog):
-        os.unlink(buildlog)
-    try:
-        os.link(logfile, buildlog)
-    except Exception:
-        pass
-
-    # the received parameters can come before or after the ready to fly message
-    mavproxy.expect(['Received [0-9]+ parameters', 'Ready to FLY'])
-    mavproxy.expect(['Received [0-9]+ parameters', 'Ready to FLY'])
-
-    util.expect_setup_callback(mavproxy, expect_callback)
-
-    expect_list_clear()
-    expect_list_extend([sitl, mavproxy])
-
-    if use_map:
-        mavproxy.send('map icon 40.072467969730496 -105.2314389590174\n')
-        mavproxy.send('map icon 40.072600990533829 -105.23146100342274\n')
-
-    # get a mavlink connection going
-    try:
-        mav = mavutil.mavlink_connection('127.0.0.1:19550', robust_parsing=True)
-    except Exception as msg:
-        print("Failed to start mavlink connection on 127.0.0.1:19550" % msg)
-        raise
-    mav.message_hooks.append(message_hook)
-    mav.idle_hooks.append(idle_hook)
-
-    failed = False
-    failed_test_msg = "None"
-
-    try:
-        mav.wait_heartbeat()
-        setup_rc(mavproxy)
-        homeloc = mav.location()
-
-        print("Lowering rotor speed")
-        mavproxy.send('rc 8 1000\n')
-
-        wait_ready_to_arm(mavproxy)
-
-        # Arm
-        print("# Arm motors")
-        if not arm_motors(mavproxy, mav):
-            failed_test_msg = "arm_motors failed"
-            print(failed_test_msg)
-            failed = True
-
-        print("Raising rotor speed")
-        mavproxy.send('rc 8 2000\n')
-
-        print("# Fly AVC mission")
-        if not fly_avc_test(mavproxy, mav):
-            failed_test_msg = "fly_avc_test failed"
-            print(failed_test_msg)
-            failed = True
-        else:
-            print("Flew AVC mission OK")
-
-        print("Lowering rotor speed")
-        mavproxy.send('rc 8 1000\n')
-
-        # mission includes disarm at end so should be ok to download logs now
-        if not log_download(mavproxy, mav, util.reltopdir("../buildlogs/CopterAVC-log.bin")):
-            failed_test_msg = "log_download failed"
-            print(failed_test_msg)
-            failed = True
-
-    except pexpect.TIMEOUT as failed_test_msg:
-        failed_test_msg = "Timeout"
-        failed = True
-
-    mav.close()
-    util.pexpect_close(mavproxy)
-    util.pexpect_close(sitl)
-
-    valgrind_log = util.valgrind_log_filepath(binary=binary, model='heli')
-    if os.path.exists(valgrind_log):
-        os.chmod(valgrind_log, 0o644)
-        shutil.copy(valgrind_log, util.reltopdir("../buildlogs/Helicopter-valgrind.log"))
-
-    if failed:
-        print("FAILED: %s" % failed_test_msg)
-        return False
-    return True
