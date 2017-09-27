@@ -1029,7 +1029,7 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     logfile = mavproxy.match.group(1)
     print("LOGFILE %s" % logfile)
 
-    buildlog = util.reltopdir("../buildlogs/falcon-test.tlog")
+    buildlog = util.reltopdir("../buildlogs/ArduCopter-test.tlog")
     print("buildlog=%s" % buildlog)
     copy_tlog = False
     if os.path.exists(buildlog):
@@ -1067,11 +1067,11 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     try:
         print("# ########################### fly_falcon try...")
 
-        mav.wait_heartbeat()
-        setup_rc(mavproxy)
-        homeloc = mav.location()
-
-        wait_ready_to_arm(mavproxy)
+        # mav.wait_heartbeat()
+        # setup_rc(mavproxy)
+        # homeloc = mav.location()
+        # 
+        # wait_ready_to_arm(mavproxy)
 
         # FIXME: cannot 'arm motors' now... not sure why?
         # Arm
@@ -1082,14 +1082,16 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
         #     failed = True
 
         # Takeoff
-        print("# Takeoff")
-        if not takeoff(mavproxy, mav, 10):
-            failed_test_msg = "takeoff failed"
-            print(failed_test_msg)
-            failed = True
+        # print("# Takeoff")
+        # if not takeoff(mavproxy, mav, 10):
+        #     failed_test_msg = "takeoff failed"
+        #     print(failed_test_msg)
+        #     failed = True
 
         # Falcon test
+        
         print("######## Fly falcon mission now")
+        time.sleep(3)
         if not fly_falcon_test(mavproxy, mav):
             failed_test_msg = "fly_falcon_test failed"
             print(failed_test_msg)
