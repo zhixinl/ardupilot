@@ -15,12 +15,8 @@ import sys
 import time
 import traceback
 
-import apmrover2
 import arducopter
 import falconcopter
-import arduplane
-import quadplane
-import ardusub
 from pysim import util
 from pymavlink import mavutil
 from pymavlink.generator import mavtemplate
@@ -220,23 +216,9 @@ def run_step(step):
         "clean": not opts.no_clean,
         "configure": not opts.no_configure,
     }
-    # if step == 'build.ArduPlane':
-    #     return util.build_SITL('bin/arduplane', **build_opts)
-    # 
-    # if step == 'build.APMrover2':
-    #     return util.build_SITL('bin/ardurover', **build_opts)
 
     if step == 'build.ArduCopter':
         return util.build_SITL('bin/arducopter', **build_opts)
-
-    # if step == 'build.AntennaTracker':
-    #     return util.build_SITL('bin/antennatracker', **build_opts)
-    # 
-    # if step == 'build.Helicopter':
-    #     return util.build_SITL('bin/arducopter-heli', **build_opts)
-    # 
-    # if step == 'build.ArduSub':
-    #     return util.build_SITL('bin/ardusub', **build_opts)
 
     binary = binary_path(step, debug=opts.debug)
 
@@ -258,20 +240,6 @@ def run_step(step):
         # return arducopter.fly_ArduCopter(binary, frame=opts.frame, **fly_opts)
         return falconcopter.fly_Falcon(binary, frame=opts.frame, **fly_opts)
 
-    # if step == 'fly.CopterAVC':
-    #     return arducopter.fly_CopterAVC(binary, **fly_opts)
-    # 
-    # if step == 'fly.ArduPlane':
-    #     return arduplane.fly_ArduPlane(binary, **fly_opts)
-    # 
-    # if step == 'fly.QuadPlane':
-    #     return quadplane.fly_QuadPlane(binary, **fly_opts)
-    # 
-    # if step == 'drive.APMrover2':
-    #     return apmrover2.drive_APMrover2(binary, frame=opts.frame, **fly_opts)
-    # 
-    # if step == 'dive.ArduSub':
-    #     return ardusub.dive_ArduSub(binary, **fly_opts)
     # 
     # if step == 'build.All':
     #     return build_all()
@@ -492,27 +460,9 @@ if __name__ == "__main__":
     'build.Examples',
     'build.Parameters',
 
-    # 'build.ArduPlane',
-    # 'defaults.ArduPlane',
-    # 'fly.ArduPlane',
-    # 'fly.QuadPlane',
-    # 
-    # 'build.APMrover2',
-    # 'defaults.APMrover2',
-    # 'drive.APMrover2',
-
     'build.ArduCopter',
     'defaults.ArduCopter',
     'fly.ArduCopter',
-
-    # 'build.Helicopter',
-    # 'fly.CopterAVC',
-    # 
-    # 'build.AntennaTracker',
-    # 
-    # 'build.ArduSub',
-    # 'defaults.ArduSub',
-    # 'dive.ArduSub',
 
     'convertgpx',
     ]
