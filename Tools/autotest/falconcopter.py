@@ -1026,12 +1026,15 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
         options += ' --map'
     mavproxy = util.start_MAVProxy_SITL('ArduCopter', options=options)
     mavproxy.expect('Telemetry log: (\S+)')
-    logfile = mavproxy.match.group(1)
-    print("LOGFILE %s" % logfile)
+    ardulogfile = mavproxy.match.group(1)
+    logfile_path,logfile_name = os.path.split(ardulogfile)
+    logfile = os.path.join(logfile_path, "falconlog.tlog")
+    print("LOGFILE PATH %s" % logfile)
 
-    buildlog = util.reltopdir("../buildlogs/ArduCopter-test.tlog")
+    buildlog = util.reltopdir("../buildlogs/FalconCopter-test.tlog")
     print("buildlog=%s" % buildlog)
     copy_tlog = False
+    
     if os.path.exists(buildlog):
         os.unlink(buildlog)
     try:
