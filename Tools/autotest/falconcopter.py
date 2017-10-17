@@ -11,6 +11,9 @@ import math
 import os
 import shutil
 import time
+from ast import literal_eval
+import csv
+import sys
 
 import pexpect
 from pymavlink import mavutil, mavwp
@@ -940,10 +943,37 @@ def setup_rc(mavproxy):
 def fly_falcon_test(mavproxy, mav):
     print("# ########################### call falcon command..")
     time.sleep(1)
+    
+    # mission test
+    try:
+        with open(os.path.join(testdir, "waypoints.csv"), 'rb') as csvfile:
+            print("open csv successfully")
+            reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            print("read csv successfully")
+            for row in reader:
+                l = []
+                p = [x for x in row[0].split(',')]
+                for y in range(len(p)):
+                    [l.append(int(p[y]))
+                     if isinstance(literal_eval(p[y]), int) is True
+                     else l.append(float(p[y]))]
+                # vehicle.mission_manager().append_waypoint(l)
+                print("falconcopter: append points list:", l)
+                mavproxy.send("falcon wp append_waypoint %s\n" % l) #FIXME how to pass array?
+                # mavproxy.send("falcon wp append_waypoint l\n")
+            print("falconcopter: call start_fligh now")
+            mavproxy.send("falcon wp start_flight\n")
+                
+    except IOError as error:
+        print("fly falcon mission failed")
+        
     # mavproxy.send('wp set 1\n')
-    mavproxy.send('falcon readsystem\n')
-    mavproxy.send("falcon status\n")
-    # time.sleep(3)
+    # mavproxy.send('falcon readsystem\n')
+    # mavproxy.send("falcon status\n")
+    # mavproxy.send("falcon wp args0 args1 args2\n")
+    # mavproxy.send("falcon wp start_motor\n")
+    # mavproxy.send("falcon wp fly_to_waypoint\n")
+    time.sleep(3)
     
     # # Fly mission #1
     # print("# Load copter_mission")
