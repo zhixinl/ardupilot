@@ -943,29 +943,37 @@ def setup_rc(mavproxy):
 def fly_falcon_test(mavproxy, mav):
     print("# ########################### call falcon command..")
     time.sleep(1)
+
+    filename = os.path.join(testdir, "waypoints.csv")
+    print("file name is %s" % filename)
+    mavproxy.send('falcon wp load_mission %s\n' % filename)
+    # mavproxy.send("falcon wp start_flight\n")
     
     # mission test
-    try:
-        with open(os.path.join(testdir, "waypoints.csv"), 'rb') as csvfile:
-            print("open csv successfully")
-            reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            print("read csv successfully")
-            for row in reader:
-                l = []
-                p = [x for x in row[0].split(',')]
-                for y in range(len(p)):
-                    [l.append(int(p[y]))
-                     if isinstance(literal_eval(p[y]), int) is True
-                     else l.append(float(p[y]))]
-                # vehicle.mission_manager().append_waypoint(l)
-                print("falconcopter: append points list:", l)
-                mavproxy.send("falcon wp append_waypoint %s\n" % l) #FIXME how to pass array?
-                # mavproxy.send("falcon wp append_waypoint l\n")
-            print("falconcopter: call start_fligh now")
-            mavproxy.send("falcon wp start_flight\n")
-                
-    except IOError as error:
-        print("fly falcon mission failed")
+    # try:
+    #     filename = os.path.join(testdir, "waypoints.csv")
+    #     print("file name is %s" % filename)
+    #     mavproxy.send('falcon wp load %s\n' % filename)
+    #     with open(os.path.join(testdir, "waypoints.csv"), 'rb') as csvfile:
+    #         print("open csv successfully")
+    #         reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    #         print("read csv successfully")
+    #         for row in reader:
+    #             l = []
+    #             p = [x for x in row[0].split(',')]
+    #             for y in range(len(p)):
+    #                 [l.append(int(p[y]))
+    #                  if isinstance(literal_eval(p[y]), int) is True
+    #                  else l.append(float(p[y]))]
+    #             # vehicle.mission_manager().append_waypoint(l)
+    #             print("falconcopter: append points list:", l)
+    #             mavproxy.send("falcon wp append_waypoint %s\n" % l) #FIXME how to pass array?
+    #             # mavproxy.send("falcon wp append_waypoint l\n")
+    #         print("falconcopter: call start_fligh now")
+    #         mavproxy.send("falcon wp start_flight\n")
+    #             
+    # except IOError as error:
+    #     print("fly falcon mission failed")
         
     # mavproxy.send('wp set 1\n')
     # mavproxy.send('falcon readsystem\n')
