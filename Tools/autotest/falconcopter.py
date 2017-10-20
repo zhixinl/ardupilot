@@ -947,6 +947,7 @@ def fly_falcon_test(mavproxy, mav):
     filename = os.path.join(testdir, "waypoints.csv")
     print("file name is %s" % filename)
     mavproxy.send('falcon wp load_mission %s\n' % filename)
+    # mavproxy.send('wp load_mission %s\n' % filename)
     # mavproxy.send("falcon wp start_flight\n")
     
     # mission test
@@ -981,7 +982,9 @@ def fly_falcon_test(mavproxy, mav):
     # mavproxy.send("falcon wp args0 args1 args2\n")
     # mavproxy.send("falcon wp start_motor\n")
     # mavproxy.send("falcon wp fly_to_waypoint\n")
-    time.sleep(3)
+    time.sleep(1)
+    # wait_times(mav, 5000)
+    wait_seconds(mav, 600)
     
     # # Fly mission #1
     # print("# Load copter_mission")

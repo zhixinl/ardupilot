@@ -63,10 +63,17 @@ def get_bearing(loc1, loc2):
 
 
 def wait_seconds(mav, seconds_to_wait):
+    print("##################")
+    print("enter wait_seconds")
+    print("##################")
     tstart = get_sim_time(mav)
+    print("start time is:", tstart)
     tnow = tstart
     while tstart + seconds_to_wait > tnow:
         tnow = get_sim_time(mav)
+    print("##################")
+    print("wait_seconds done, finish time is:", get_sim_time(mav))
+    print("##################")
 
 
 def get_sim_time(mav):
@@ -188,6 +195,21 @@ def wait_location(mav, loc, accuracy=5, timeout=30, target_altitude=None, height
             return True
     print("Failed to attain location")
     return False
+
+
+# zhixin
+def wait_times(mav, timeout=30):
+    print("##################")
+    print("enter zhixin's wait_times")
+    print("##################")
+    tstart = get_sim_time(mav)
+    print("\nstart time is: ", tstart)
+    print("\nstart time is %u: " % tstart)
+    print("\nwaiting for %u seconds" % timeout)
+    while get_sim_time(mav) < tstart + timeout:
+        print("waiting.....")
+    print("wait_times done, current time is:", get_sim_time(mav))
+    return True
 
 
 def wait_waypoint(mav, wpnum_start, wpnum_end, allow_skip=True, max_dist=2, timeout=400):
