@@ -27,7 +27,8 @@ vinfo = vehicleinfo.VehicleInfo()
 # get location of scripts
 testdir = os.path.dirname(os.path.realpath(__file__))
 
-HOME = mavutil.location(-35.362938, 149.165085, 584, 270)
+# HOME = mavutil.location(-35.362938, 149.165085, 584, 270)
+HOME = mavutil.location(37.41175271, -121.996621, 2, 90)
 AVCHOME = mavutil.location(40.072842, -105.230575, 1586, 0)
 
 homeloc = None
@@ -915,12 +916,13 @@ def load_mission_from_file(mavproxy, mav, filename):
     mavproxy.expect('Flight plan received')
     mavproxy.send('wp list\n')
     mavproxy.expect('Requesting [0-9]+ waypoints')
-
+    '''
     # update num_wp
     wploader = mavwp.MAVWPLoader()
     wploader.load(filename)
     num_wp = wploader.count()
     return True
+    '''
 
 
 def save_mission_to_file(mavproxy, mav, filename):
@@ -946,12 +948,15 @@ def fly_falcon_test(mavproxy, mav):
 
     # mission test
     filename = os.path.join(testdir, "waypoints.csv")
+    filename_txt = os.path.join(testdir, "waypoints_map.txt")
     print("file name is %s" % filename)
     mavproxy.send('falcon wp load_mission %s\n' % filename)
-
+    # mavproxy.send('wp load_mission %s\n' % filename)
+    load_mission_from_file(mavproxy, mav, filename_txt)
+    
     time.sleep(1)
     # wait_times(mav, 5000)
-    wait_seconds(mav, 600)
+    wait_seconds(mav, 500)
 
     # set throttle to minimum
     mavproxy.send('rc 3 1000\n')
