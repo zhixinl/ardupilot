@@ -941,74 +941,17 @@ def setup_rc(mavproxy):
 
 # fly_falcon_test - falcon test, copy from fly_auto_test()
 def fly_falcon_test(mavproxy, mav):
-    print("# ########################### call falcon command..")
-    time.sleep(1)
+    print("# ########################### fly_falcon_test +++")
+    # time.sleep(1)
 
+    # mission test
     filename = os.path.join(testdir, "waypoints.csv")
     print("file name is %s" % filename)
     mavproxy.send('falcon wp load_mission %s\n' % filename)
-    # mavproxy.send('wp load_mission %s\n' % filename)
-    # mavproxy.send("falcon wp start_flight\n")
-    
-    # mission test
-    # try:
-    #     filename = os.path.join(testdir, "waypoints.csv")
-    #     print("file name is %s" % filename)
-    #     mavproxy.send('falcon wp load %s\n' % filename)
-    #     with open(os.path.join(testdir, "waypoints.csv"), 'rb') as csvfile:
-    #         print("open csv successfully")
-    #         reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    #         print("read csv successfully")
-    #         for row in reader:
-    #             l = []
-    #             p = [x for x in row[0].split(',')]
-    #             for y in range(len(p)):
-    #                 [l.append(int(p[y]))
-    #                  if isinstance(literal_eval(p[y]), int) is True
-    #                  else l.append(float(p[y]))]
-    #             # vehicle.mission_manager().append_waypoint(l)
-    #             print("falconcopter: append points list:", l)
-    #             mavproxy.send("falcon wp append_waypoint %s\n" % l) #FIXME how to pass array?
-    #             # mavproxy.send("falcon wp append_waypoint l\n")
-    #         print("falconcopter: call start_fligh now")
-    #         mavproxy.send("falcon wp start_flight\n")
-    #             
-    # except IOError as error:
-    #     print("fly falcon mission failed")
-        
-    # mavproxy.send('wp set 1\n')
-    # mavproxy.send('falcon readsystem\n')
-    # mavproxy.send("falcon status\n")
-    # mavproxy.send("falcon wp args0 args1 args2\n")
-    # mavproxy.send("falcon wp start_motor\n")
-    # mavproxy.send("falcon wp fly_to_waypoint\n")
+
     time.sleep(1)
     # wait_times(mav, 5000)
     wait_seconds(mav, 600)
-    
-    # # Fly mission #1
-    # print("# Load copter_mission")
-    # if not load_mission_from_file(mavproxy, mav, os.path.join(testdir, "copter_mission.txt")):
-    #     print("load copter_mission failed")
-    #     return False
-    # 
-    # # load the waypoint count
-    # global homeloc
-    # global num_wp
-    # print("test: Fly a mission from 1 to %u" % num_wp)
-    # mavproxy.send('wp set 1\n')
-    # 
-    # # switch into AUTO mode and raise throttle
-    # mavproxy.send('switch 4\n')  # auto mode
-    # wait_mode(mav, 'AUTO')
-    # mavproxy.send('rc 3 1500\n')
-    # 
-    # # fly the mission
-    # ret = wait_waypoint(mav, 0, num_wp-1, timeout=500)
-
-    # land if mission failed
-    # if ret is False:
-    #     land(mavproxy, mav)
 
     # set throttle to minimum
     mavproxy.send('rc 3 1000\n')
@@ -1109,33 +1052,10 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     mavproxy.send("set moddebug 3\n")
 
     try:
-        print("# ########################### fly_falcon try...")
-
-        # mav.wait_heartbeat()
-        # setup_rc(mavproxy)
-        # homeloc = mav.location()
-        # 
-        # wait_ready_to_arm(mavproxy)
-
-        # FIXME: cannot 'arm motors' now... not sure why?
-        # Arm
-        # print("######################## Arm motors")
-        # if not arm_motors(mavproxy, mav):
-        #     failed_test_msg = "arm_motors failed"
-        #     print(failed_test_msg)
-        #     failed = True
-
-        # Takeoff
-        # print("# Takeoff")
-        # if not takeoff(mavproxy, mav, 10):
-        #     failed_test_msg = "takeoff failed"
-        #     print(failed_test_msg)
-        #     failed = True
 
         # Falcon test
-        
         print("######## Fly falcon mission now")
-        time.sleep(3)
+        # time.sleep(3)
         if not fly_falcon_test(mavproxy, mav):
             failed_test_msg = "fly_falcon_test failed"
             print(failed_test_msg)
