@@ -954,8 +954,6 @@ def fly_falcon_test(mavproxy, mav):
     # mavproxy.send('wp load_mission %s\n' % filename)
     load_mission_from_file(mavproxy, mav, filename_txt)
     
-    time.sleep(1)
-    # wait_times(mav, 5000)
     wait_seconds(mav, 500)
 
     # set throttle to minimum

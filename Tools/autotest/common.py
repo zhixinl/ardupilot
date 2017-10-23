@@ -197,21 +197,6 @@ def wait_location(mav, loc, accuracy=5, timeout=30, target_altitude=None, height
     return False
 
 
-# zhixin
-def wait_times(mav, timeout=30):
-    print("##################")
-    print("enter zhixin's wait_times")
-    print("##################")
-    tstart = get_sim_time(mav)
-    print("\nstart time is: ", tstart)
-    print("\nstart time is %u: " % tstart)
-    print("\nwaiting for %u seconds" % timeout)
-    while get_sim_time(mav) < tstart + timeout:
-        print("waiting.....")
-    print("wait_times done, current time is:", get_sim_time(mav))
-    return True
-
-
 def wait_waypoint(mav, wpnum_start, wpnum_end, allow_skip=True, max_dist=2, timeout=400):
     """Wait for waypoint ranges."""
     tstart = get_sim_time(mav)
