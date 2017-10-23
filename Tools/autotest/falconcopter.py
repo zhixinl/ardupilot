@@ -944,16 +944,18 @@ def setup_rc(mavproxy):
 # fly_falcon_test - falcon test, copy from fly_auto_test()
 def fly_falcon_test(mavproxy, mav):
     print("# ########################### fly_falcon_test +++")
-    # time.sleep(1)
 
     # mission test
-    filename = os.path.join(testdir, "waypoints.csv")
+    # send waypoints for reference path rendering
     filename_txt = os.path.join(testdir, "waypoints_map.txt")
-    print("file name is %s" % filename)
-    mavproxy.send('falcon wp load_mission %s\n' % filename)
-    # mavproxy.send('wp load_mission %s\n' % filename)
     load_mission_from_file(mavproxy, mav, filename_txt)
     
+    # send waypoints for running flight plan
+    filename = os.path.join(testdir, "waypoints.csv")
+    print("file name is %s" % filename)
+    mavproxy.send('falcon wp load_mission %s\n' % filename)
+    
+    # wait until flight plan finished
     wait_seconds(mav, 500)
 
     # set throttle to minimum
