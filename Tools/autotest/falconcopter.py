@@ -956,7 +956,7 @@ def fly_falcon_test(mavproxy, mav):
     mavproxy.send('falcon wp load_mission %s\n' % filename)
     
     # wait until flight plan finished
-    wait_seconds(mav, 500)
+    wait_seconds(mav, 40)
 
     # set throttle to minimum
     mavproxy.send('rc 3 1000\n')

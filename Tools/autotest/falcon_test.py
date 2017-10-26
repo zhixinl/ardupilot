@@ -37,7 +37,8 @@ def get_default_params(atype, binary):
     """Get default parameters."""
 
     # use rover simulator so SITL is not starved of input
-    HOME = mavutil.location(40.071374969556928, -105.22978898137808, 1583.702759, 246)
+    # HOME = mavutil.location(40.071374969556928, -105.22978898137808, 1583.702759, 246)
+    HOME = mavutil.location(37.411855, -121.994204)
     if "plane" in binary or "rover" in binary:
         frame = "rover"
     else:
