@@ -933,6 +933,28 @@ def save_mission_to_file(mavproxy, mav, filename):
     print("num_wp: %d" % num_wp)
     return True
 
+def read_mission_for_testing(filename):
+    # Read waypoints from given file.
+    # Turn into something nice for python to use
+    # Open file, read contents
+    # Parse each line, turn into waypoint structure, add to mission_points list
+
+    if not os.path.isfile(filename):
+        print("File does not exist. Cannot proceed.")
+        return
+    try:
+        print("reading waypoints file")
+        file_entry = open(filename, "r")
+        mission_points = [ ]
+        for line in file_entry:
+            line = line.split(',')
+            print(line[2], line[3], line[4])
+            mission_points.append(mavutil.location(float(line[2]),float(line[3]), float(line[4])))
+        print (mission_points)
+        return mission_points
+    except:
+        print("failed to open file")
+        traceback.print_exc()
 
 def setup_rc(mavproxy):
     """Setup RC override control."""
@@ -955,6 +977,23 @@ def fly_falcon_test(mavproxy, mav):
     print("file name is %s" % filename)
     mavproxy.send('falcon wp load_mission %s\n' % filename)
     
+    print("Uploaded the file to the falcon")
+
+    # Load mission points into list we can look at:
+    mission_points = read_mission_for_testing(filename)
+    print(mission_points)
+    # Watch for drone to reach each mission point
+    for point in mission_points:
+        #if wait_for_waypoint_reached(mav, point, timeout=60):
+        try:
+            print("fly_falcon_test: waiting 120 sec to reach point %7.5f %7.5f", point.lat, point.lng)
+            if wait_location(mav, point, timeout=120):
+                print("Waypoint reached")        # TODO: print info about the waypoint, how long it took
+            else:
+                print("Failed to reach waypoint")# TODO: print info about failure, maybe current position and desiired position
+        except:
+            traceback.print_exc()
+    print("Load mission test complete")
     # wait until flight plan finished
     wait_seconds(mav, 40)
 
