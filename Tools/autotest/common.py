@@ -63,17 +63,11 @@ def get_bearing(loc1, loc2):
 
 
 def wait_seconds(mav, seconds_to_wait):
-    print("##################")
-    print("enter wait_seconds")
-    print("##################")
     tstart = get_sim_time(mav)
     print("start time is:", tstart)
     tnow = tstart
     while tstart + seconds_to_wait > tnow:
         tnow = get_sim_time(mav)
-    print("##################")
-    print("wait_seconds done, finish time is:", get_sim_time(mav))
-    print("##################")
 
 
 def get_sim_time(mav):
@@ -176,6 +170,36 @@ def wait_distance(mav, distance, accuracy=5, timeout=30):
     print("Failed to attain distance %u" % distance)
     return False
 
+
+def wait_location_falcon(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
+    """Wait for arrival at a location."""
+    tstart = get_sim_time(mav)
+    if target_altitude is None:
+        target_altitude = loc.alt
+    print("Waiting for location %.4f,%.4f at altitude %.1f height_accuracy=%.1f" % (
+        loc.lat, loc.lng, target_altitude, height_accuracy))
+    while get_sim_time(mav) < tstart + timeout:
+        lat = mav.field("GLOBAL_POSITION_INT", "lat")
+        lat *= 1.0e-7
+        lon = mav.field("GLOBAL_POSITION_INT", "lon")
+        lon *= 1.0e-7
+        alt = mav.field("GLOBAL_POSITION_INT", "alt")
+        alt *= 0.001
+        print("$$$$$$$$$  lat = ", lat, " lon = ", lon, " alt = ", alt)
+        
+
+        from pymavlink import mavutil
+        pos = mavutil.location(lat, lon)
+        delta = get_distance(loc, pos)
+        print("$$$$  distance %.2f" % (delta))
+
+        if delta <= accuracy:
+            if height_accuracy != -1 and math.fabs(pos.alt - target_altitude) > height_accuracy:
+                continue
+            print("Reached location (%.2f meters)" % delta)
+            return True
+    print("Failed to attain location")
+    return False
 
 def wait_location(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
     """Wait for arrival at a location."""
