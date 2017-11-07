@@ -1,0 +1,1507 @@
+{
+    "camera": {
+        "delay": 100,
+        "focalLength": 35,
+        "imageSize": {
+            "height": 4912,
+            "width": 7360
+        },
+        "name": "Sony Alpha 7R",
+        "processTime": 1500,
+        "sensorSize": {
+            "height": 24,
+            "width": 35.899999999999999
+        }
+    },
+    "description": "Navigator exported Project",
+    "heightReference": "Relative",
+    "model": {
+        "tasks": [
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.41261848198981,
+                    "longitude": -121.99653768103764
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412483786392485,
+                    "longitude": -121.99663166248816
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412349090795168,
+                    "longitude": -121.99672564393869
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412214395197843,
+                    "longitude": -121.99681962538922
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412079699600525,
+                    "longitude": -121.99691360683975
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411945004003201,
+                    "longitude": -121.99700758829027
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411810308405883,
+                    "longitude": -121.99710156974081
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411675612808558,
+                    "longitude": -121.99719555119134
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411564022686782,
+                    "longitude": -121.99694172513253
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.4116987182841,
+                    "longitude": -121.996847743682
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411833413881425,
+                    "longitude": -121.99675376223148
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411968109478742,
+                    "longitude": -121.99665978078094
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412102805076067,
+                    "longitude": -121.99656579933041
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412237500673385,
+                    "longitude": -121.99647181787988
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412372196270709,
+                    "longitude": -121.99637783642936
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412506891868027,
+                    "longitude": -121.99628385497883
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412641587465352,
+                    "longitude": -121.99618987352829
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412776283062669,
+                    "longitude": -121.99609589207776
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412910978659994,
+                    "longitude": -121.99600191062724
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.413068779732853,
+                    "longitude": -121.99556012166737
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412934084135529,
+                    "longitude": -121.9956541031179
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412799388538211,
+                    "longitude": -121.99574808456843
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412664692940886,
+                    "longitude": -121.99584206601895
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412529997343569,
+                    "longitude": -121.99593604746948
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412395301746244,
+                    "longitude": -121.99603002892002
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412260606148926,
+                    "longitude": -121.99612401037055
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412125910551602,
+                    "longitude": -121.99621799182107
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411991214954284,
+                    "longitude": -121.9963119732716
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411856519356967,
+                    "longitude": -121.99640595472214
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411721823759642,
+                    "longitude": -121.99649993617267
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411587128162324,
+                    "longitude": -121.99659391762319
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411452432565,
+                    "longitude": -121.99668789907372
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411610233637859,
+                    "longitude": -121.99624611011386
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411744929235184,
+                    "longitude": -121.99615212866333
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411879624832501,
+                    "longitude": -121.99605814721279
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412014320429826,
+                    "longitude": -121.99596416576226
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412149016027143,
+                    "longitude": -121.99587018431174
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412283711624468,
+                    "longitude": -121.99577620286121
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412418407221786,
+                    "longitude": -121.99568222141068
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412553102819111,
+                    "longitude": -121.99558823996014
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412687798416428,
+                    "longitude": -121.99549425850962
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412822494013753,
+                    "longitude": -121.99540027705909
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.41295718961107,
+                    "longitude": -121.99530629560856
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412845599489287,
+                    "longitude": -121.99505246954975
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.41271090389197,
+                    "longitude": -121.99514645100028
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412576208294652,
+                    "longitude": -121.99524043245081
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412441512697328,
+                    "longitude": -121.99533441390133
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.41230681710001,
+                    "longitude": -121.99542839535187
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412172121502685,
+                    "longitude": -121.9955223768024
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412037425905368,
+                    "longitude": -121.99561635825293
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411902730308043,
+                    "longitude": -121.99571033970346
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411768034710725,
+                    "longitude": -121.99580432115398
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411633339113401,
+                    "longitude": -121.99589830260452
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411656444588942,
+                    "longitude": -121.99555049509517
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411791140186267,
+                    "longitude": -121.99545651364465
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411925835783585,
+                    "longitude": -121.99536253219412
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412060531380902,
+                    "longitude": -121.99526855074359
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412195226978227,
+                    "longitude": -121.99517456929306
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412329922575545,
+                    "longitude": -121.99508058784254
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412464618172869,
+                    "longitude": -121.994986606392
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412599313770187,
+                    "longitude": -121.99489262494147
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412734009367512,
+                    "longitude": -121.99479864349094
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412622419245729,
+                    "longitude": -121.99454481743213
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412487723648411,
+                    "longitude": -121.99463879888266
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412353028051086,
+                    "longitude": -121.99473278033319
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412218332453769,
+                    "longitude": -121.99482676178373
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412083636856444,
+                    "longitude": -121.99492074323425
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411948941259126,
+                    "longitude": -121.99501472468478
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411814245661802,
+                    "longitude": -121.99510870613531
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411679550064484,
+                    "longitude": -121.99520268758585
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411837351137343,
+                    "longitude": -121.99476089862597
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411972046734668,
+                    "longitude": -121.99466691717544
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412106742331986,
+                    "longitude": -121.99457293572492
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.41224143792931,
+                    "longitude": -121.99447895427438
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 28.978999999999999
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412376133526628,
+                    "longitude": -121.99438497282385
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.412129847807527,
+                    "longitude": -121.99422512821558
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411995152210203,
+                    "longitude": -121.99431910966611
+                },
+                "type": "Matrix"
+            },
+            {
+                "action": "Trigger",
+                "actionDelay": 0,
+                "class": "SingleWaypoint",
+                "flags": [
+                    "EndOfMatrix"
+                ],
+                "maxSpeed": 8,
+                "orientation": {
+                    "pitch": -90,
+                    "roll": 0,
+                    "yaw": 208.97900000000001
+                },
+                "position": {
+                    "height": 50,
+                    "latitude": 37.411860456612885,
+                    "longitude": -121.99441309111664
+                },
+                "type": "Matrix"
+            }
+        ]
+    },
+    "navigatorVersion": "V3.4.4",
+    "version": "0.1"
+}
