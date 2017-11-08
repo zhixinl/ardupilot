@@ -7,13 +7,9 @@
 #   switch 5 = Loiter
 #   switch 6 = Stabilize
 from __future__ import print_function
-import math
 import os
 import shutil
-import time
-from ast import literal_eval
-import csv
-import sys
+import traceback
 
 import pexpect
 from pymavlink import mavutil, mavwp
@@ -994,15 +990,6 @@ def fly_falcon_test(mavproxy, mav):
         except:
             traceback.print_exc()
     print("Load mission test complete")
-    # wait until flight plan finished
-    wait_seconds(mav, 40)
-
-    # set throttle to minimum
-    mavproxy.send('rc 3 1000\n')
-
-    # wait for disarm
-    mav.motors_disarmed_wait()
-    print("MOTORS DISARMED OK")
 
     # print("Auto mission completed: passed=%s" % ret)
     print("Auto mission completed: passed=True")
@@ -1026,25 +1013,6 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
     print("# ########################### enter fly_falcon..")
 
     home = "%f,%f,%u,%u" % (HOME.lat, HOME.lng, HOME.alt, HOME.heading)
-    # sitl = util.start_SITL(binary, wipe=True, model=frame, home=home, speedup=speedup)
-    # mavproxy = util.start_MAVProxy_SITL('ArduCopter', options='--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --quadcopter')
-    # mavproxy.expect('Received [0-9]+ parameters')
-    # 
-    # # setup test parameters
-    # if params is None:
-    #     params = vinfo.options["ArduCopter"]["frames"][frame]["default_params_filename"]
-    # if not isinstance(params, list):
-    #     params = [params]
-    # for x in params:
-    #     mavproxy.send("param load %s\n" % os.path.join(testdir, x))
-    #     mavproxy.expect('Loaded [0-9]+ parameters')
-    # mavproxy.send("param set LOG_REPLAY 1\n")
-    # mavproxy.send("param set LOG_DISARMED 1\n")
-    # time.sleep(3)
-    # 
-    # # reboot with new parameters
-    # util.pexpect_close(mavproxy)
-    # util.pexpect_close(sitl)
 
     sitl = util.start_SITL(binary, model=frame, home=home, speedup=speedup, valgrind=valgrind, gdb=gdb, gdbserver=gdbserver)
     options = '--sitl=127.0.0.1:5501 --out=127.0.0.1:19550 --quadcopter --streamrate=5'
@@ -1106,16 +1074,6 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
             failed = True
         else:
             print("fly_falcon_test OK")
-
-        # wait for disarm
-        mav.motors_disarmed_wait()  # This is important, or falcon module will not print log output
-
-        print("# ########################### download log..")
-
-        if not log_download(mavproxy, mav, util.reltopdir("../buildlogs/ArduCopter-log.bin")):
-            failed_test_msg = "log_download failed"
-            print(failed_test_msg)
-            failed = True
 
     except pexpect.TIMEOUT as failed_test_msg:
         failed_test_msg = "Timeout"
