@@ -7,10 +7,14 @@
 #   switch 5 = Loiter
 #   switch 6 = Stabilize
 from __future__ import print_function
+import math
 import os
 import shutil
+import time
+from ast import literal_eval
+import csv
+import sys
 import traceback
-
 import pexpect
 from pymavlink import mavutil, mavwp
 
@@ -944,9 +948,9 @@ def read_mission_for_testing(filename):
         mission_points = [ ]
         for line in file_entry:
             line = line.split(',')
-            print(line[2], line[3], line[4])
-            mission_points.append(mavutil.location(float(line[2]),float(line[3]), float(line[4])))
-        print (mission_points)
+            #print(line[2], line[3], line[4], line[8])
+            mission_points.append([mavutil.location(float(line[2]),float(line[3]), float(line[4])), float(line[8]), float(line[0])])
+
         return mission_points
     except:
         print("failed to open file")
@@ -960,46 +964,76 @@ def setup_rc(mavproxy):
     mavproxy.send('rc 3 1000\n')
 
 # fly_falcon_test - falcon test, copy from fly_auto_test()
-def fly_falcon_test(mavproxy, mav):
+def fly_falcon_test(mavproxy, mav, filepath):
     print("# ########################### fly_falcon_test +++")
+    test_passed = True
+    file_list = []
+    if(os.path.isfile(filepath)):
+        #file_list += filepath
+        file_list.append(filepath)
+    if(os.path.isdir(filepath)):
+        file_list += [os.path.join(filepath,each) for each in os.listdir(filepath) if each.endswith('.csv') or each.endswith('.json')]
+    print(file_list)
 
+    for entry in file_list:
+        (filePath, extension) = os.path.splitext(entry)
+        csv_file_name = entry
+        if extension == '.json':	# If json file, convert to csv
+            csv_file_name = csv_file_name.replace('.json', '.csv')
+            if (not generate_csv_file(entry, csv_file_name)):
+                print("%s file for %s could not be generated. Moving to next file" %(csv_file_name, entry))
+                continue
+            else:
+                print("%s file for %s generated. Sending for running the test" %(csv_file_name, entry))
+
+        return run_falcon_test(mavproxy, mav, csv_file_name)
+
+def run_falcon_test(mavproxy, mav, filename_csv):
+    test_passed = True
     # mission test
-    # send waypoints for reference path rendering
-    filename_txt = os.path.join(testdir, "waypoints_map.txt")
+
+    # Generate mavlink file for plotting on the map
+    filename_txt = generate_mavlink_map_file(filename_csv)
+    #send waypoints for reference path rendering
     load_mission_from_file(mavproxy, mav, filename_txt)
-    
-    # send waypoints for running flight plan
-    filename = os.path.join(testdir, "waypoints.csv")
-    print("file name is %s" % filename)
-    mavproxy.send('falcon wp load_mission %s\n' % filename)
+
+    # Use mavproxy to pass command to falcon module to both
+    # send the waypoints / flight plan to falcon and
+    # start the falcon to execute the mission.
+    print(filename_csv)
+    mavproxy.send('falcon wp load_mission %s\n' % filename_csv)
     
     print("Uploaded the file to the falcon")
 
     # Load mission points into list we can look at:
-    mission_points = read_mission_for_testing(filename)
-    print(mission_points)
+    mission_points = read_mission_for_testing(filename_csv)
+    #print(mission_points)
     # Watch for drone to reach each mission point
-    for point in mission_points:
-        #if wait_for_waypoint_reached(mav, point, timeout=60):
+    summary = []
+    for point in mission_points:		# [ [ lat, lon, alt ], max_speed ]
         try:
-            print("fly_falcon_test: waiting 120 sec to reach point %7.5f %7.5f", point.lat, point.lng)
-            if wait_location(mav, point, timeout=120):
+            max_timeout = 10
+            if(not point[1] == 0 and not point[1] == None):	# max speed cannot be 0 or none
+                 max_timeout =  2*math.ceil(get_distance(mav.location(), point[0])/point[1])
+            (status, howClose, elapsedTime) = wait_location_falcon(mav, point[0], accuracy=3, timeout=int(max_timeout))
+            summary.append([point, max_timeout, status, howClose, elapsedTime, point[2]])
+            if status:
                 print("Waypoint reached")        # TODO: print info about the waypoint, how long it took
             else:
                 print("Failed to reach waypoint")# TODO: print info about failure, maybe current position and desiired position
+                test_passed = False
         except:
             traceback.print_exc()
     print("Load mission test complete")
+    print ("Test Summary:\n")
+    for entry in summary:		# 0:point, 1:maxTimeout, 2:status, 3:howClose, 4:elapsedTime
+        print ("Waypoint #%d. %s: %s   Got within %s meters in %0.1f secs (timeout was %0.1f)" %(entry[5], str(entry[0][0]), ("Success" if entry[2] else "Failure"), str(entry[3]), entry[4], entry[1]))
 
-    # print("Auto mission completed: passed=%s" % ret)
-    print("Auto mission completed: passed=True")
-
-    # return ret
-    return True
-
+    print("Auto mission completed")
+    return test_passed
 
 # Copy from arducopter.fly_ArduCopter
-def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, frame=None, params=None, gdbserver=False, speedup=10):
+def fly_Falcon(binary, filepath, viewerip=None, use_map=False, valgrind=False, gdb=False, frame=None, params=None, gdbserver=False, speedup=10):
     """Fly ArduCopter in SITL.
 
     you can pass viewerip as an IP address to optionally send fg and
@@ -1009,7 +1043,6 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
 
     if frame is None:
         frame = '+'
-
     print("# ########################### enter fly_falcon..")
 
     home = "%f,%f,%u,%u" % (HOME.lat, HOME.lng, HOME.alt, HOME.heading)
@@ -1068,7 +1101,7 @@ def fly_Falcon(binary, viewerip=None, use_map=False, valgrind=False, gdb=False, 
         # Falcon test
         print("######## Fly falcon mission now")
         # time.sleep(3)
-        if not fly_falcon_test(mavproxy, mav):
+        if not fly_falcon_test(mavproxy, mav, filepath):
             failed_test_msg = "fly_falcon_test failed"
             print(failed_test_msg)
             failed = True

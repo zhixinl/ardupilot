@@ -14,7 +14,6 @@ import signal
 import sys
 import time
 import traceback
-
 import arducopter
 import falconcopter
 from pysim import util
@@ -239,7 +238,7 @@ def run_step(step):
 
     if step == 'fly.ArduCopter':
         # return arducopter.fly_ArduCopter(binary, frame=opts.frame, **fly_opts)
-        return falconcopter.fly_Falcon(binary, frame=opts.frame, **fly_opts)
+        return falconcopter.fly_Falcon(binary, frame=opts.frame, filepath=opts.filepath, **fly_opts)
 
     # 
     # if step == 'build.All':
@@ -427,6 +426,12 @@ def run_tests(steps):
 
     return passed
 
+def print_usage(string):
+    print(string)
+    print("Usage: falcon_test.py build.ArduCopter fly.ArduCopter --filepath /home/Desktop/flight_folder")
+    print("Usage: falcon_test.py build.ArduCopter fly.ArduCopter --filepath /home/Desktop/flight_folder/flight_plan.csv")
+    sys.exit()
+
 if __name__ == "__main__":
 ############## main program #############
     os.environ['PYTHONUNBUFFERED'] = '1'
@@ -449,6 +454,7 @@ if __name__ == "__main__":
     parser.add_option("--gdbserver", default=False, action='store_true', help='run ArduPilot binaries under gdbserver')
     parser.add_option("--no-clean", default=False, action='store_true', help='do not clean before building', dest="no_clean")
     parser.add_option("--no-configure", default=False, action='store_true', help='do not configure before building', dest="no_configure")
+    parser.add_option("--filepath", type='string', default='', help='name of the folder with path containing flight plan .csv or .json files or for single flight plan, .csv filename with path or .json file with path')
 
     opts, args = parser.parse_args()
 
@@ -473,6 +479,15 @@ if __name__ == "__main__":
     # ensure we catch timeouts
     signal.signal(signal.SIGALRM, alarm_handler)
     signal.alarm(opts.timeout)
+    if not opts.filepath or (opts.filepath == '' or opts.filepath == None):
+        print_usage("Existing .csv, .json file or folder name with path required")
+    elif not os.path.isdir(opts.filepath):
+        if not os.path.isfile(opts.filepath):
+            print_usage("Existing .csv, .json file or folder name with path required")
+        else:
+            path,ext = os.path.splitext(opts.filepath)
+            if(not (ext == '.csv' or ext == '.json')):
+                print_usage("Existing .csv, .json file or folder name with path required")
 
     if opts.list:
         for step in steps:

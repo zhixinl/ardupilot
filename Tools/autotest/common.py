@@ -5,7 +5,9 @@ import time
 from pymavlink import mavwp
 
 from pysim import util
-
+from pprint import pprint
+import csv, json, os
+import traceback
 # a list of pexpect objects to read while waiting for
 # messages. This keeps the output to stdout flowing
 expect_list = []
@@ -171,7 +173,7 @@ def wait_distance(mav, distance, accuracy=5, timeout=30):
     return False
 
 
-def wait_location_falcon(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
+def wait_location_falcon_drone(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
     """Wait for arrival at a location."""
     tstart = get_sim_time(mav)
     if target_altitude is None:
@@ -200,6 +202,29 @@ def wait_location_falcon(mav, loc, accuracy=5, timeout=30, target_altitude=None,
             return True
     print("Failed to attain location")
     return False
+
+def wait_location_falcon(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
+    """Wait for arrival at a location."""
+    print("Timeout value is %d" %(timeout))
+    delta = 0.0
+    tstart = get_sim_time(mav)
+    if target_altitude is None:
+        target_altitude = loc.alt
+    print("Waiting for location %.4f,%.4f at altitude %.1f height_accuracy=%.1f" % (
+        loc.lat, loc.lng, target_altitude, height_accuracy))
+    now = get_sim_time(mav)
+    while now < tstart + timeout:
+        pos = mav.location()
+        delta = get_distance(loc, pos)
+        print("Distance %.2f meters alt %.1f" % (delta, pos.alt))
+        if delta <= accuracy:
+            if height_accuracy != -1 and math.fabs(pos.alt - target_altitude) > height_accuracy:
+                continue
+            print("Reached location (%.2f meters)" % delta)
+            return (True, delta, now-tstart)	# Return tuple: (true, distance from target, elapsed time)
+        now = get_sim_time(mav)
+    print("Failed to attain location")
+    return (False, delta, now-tstart)		# Return tuple: (false, distance from target, elapsed time)
 
 def wait_location(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
     """Wait for arrival at a location."""
@@ -312,3 +337,74 @@ def log_download(mavproxy, mav, filename, timeout=360):
     mav.wait_heartbeat()
     mav.wait_heartbeat()
     return True
+
+def read_json(filename):
+    try:
+        with open(filename) as json_data_file:
+            json_data = json.load(json_data_file)
+        json_data_file.close()
+        return json_data
+    except:
+        print('Could not read the json file')
+        json_data_file.close()
+        return {}
+
+#TODO: get the flag values instead of using the default values. Check if 'flags' key values are same as the flgs value in the sample csv file.
+def generate_csv_file(filename_json, filename_csv):
+    data = read_json(filename_json)
+    if not data =={} and 'model' in data.keys():
+        if not data['model']['tasks'] == None and not data['model']['tasks'] == []:
+            keyid = 1
+            wptype = 1
+            wait_time = 2.22
+            flag_default = 2
+            wp_event = 1
+            max_accel = 2.33
+            waypoint_list = data['model']['tasks']
+
+            try:
+                with open(filename_csv, 'w+') as csv_file_handler:
+                    csv_file_writer = csv.writer(csv_file_handler, delimiter=',',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    for entry in waypoint_list:
+
+                        row = [keyid, wptype, entry['position']['latitude'], entry['position']['longitude'], entry['position']['height'], entry['orientation'] ['roll'], entry['orientation']['pitch'], entry['orientation']['yaw'], entry['maxSpeed'], max_accel, wp_event, wait_time, flag_default]
+                        #print (row)
+                        csv_file_writer.writerow(row)
+                        keyid += 1
+                csv_file_handler.close()
+            except:
+                print("could not generate .csv file.")
+                csv_file_handler.close()
+                traceback.print_exc()
+                return False
+            return True
+    return False
+
+def generate_mavlink_map_file(filename_csv):
+    filename_mav = filename_csv.replace('.csv','_map.txt')
+    if(os.path.isfile(filename_mav) and not os.path.getsize(filename_mav) == 0 and os.path.getmtime(filename_csv) < os.path.getmtime(filename_mav)):
+        print('File already exists.')
+    else:
+        try:
+            with open(filename_csv, 'r') as file_handler_csv:
+                with open(filename_mav, 'w+') as file_handler_mav:
+                    file_reader_csv = csv.reader(file_handler_csv, delimiter=',', quotechar='|')
+                    file_handler_mav.write('QGC WPL 110\n')
+                    first_entry = True
+                    for entry in file_reader_csv:
+                        if(first_entry):
+                            file_handler_mav.write(('%s\t1\t0\t16\t0.0\t0.0\t0.0\t0.0\t%.8f\t%.8f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
+
+                            first_entry = False
+                        else:
+                            file_handler_mav.write(('%s\t0\t3\t16\t0.0\t0.0\t0.0\t0.0\t%.8f\t%.8f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
+            file_handler_csv.close()
+            file_handler_mav.close()
+        except:
+            print("Could not generate map file")
+            file_handler_csv.close()
+            file_handler_mav.close()
+            traceback.print_exc()
+            return ""
+    return filename_mav
