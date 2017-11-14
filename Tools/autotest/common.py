@@ -203,14 +203,14 @@ def wait_location_falcon_drone(mav, loc, accuracy=5, timeout=30, target_altitude
     print("Failed to attain location")
     return False
 
-def wait_location_falcon(mav, loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
+def wait_location_falcon(mav, loc, id_loc, accuracy=5, timeout=30, target_altitude=None, height_accuracy=-1):
     """Wait for arrival at a location."""
     print("Timeout value is %d" %(timeout))
     delta = 0.0
     tstart = get_sim_time(mav)
     if target_altitude is None:
         target_altitude = loc.alt
-    print("Waiting for location %.4f,%.4f at altitude %.1f height_accuracy=%.1f" % (
+    print("Waiting for location #%d. %.6f,%.6f at altitude %.1f height_accuracy=%.1f" % (id_loc,
         loc.lat, loc.lng, target_altitude, height_accuracy))
     now = get_sim_time(mav)
     while now < tstart + timeout:
@@ -368,7 +368,7 @@ def generate_csv_file(filename_json, filename_csv):
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     for entry in waypoint_list:
 
-                        row = [keyid, wptype, entry['position']['latitude'], entry['position']['longitude'], entry['position']['height'], entry['orientation'] ['roll'], entry['orientation']['pitch'], entry['orientation']['yaw'], entry['maxSpeed'], max_accel, wp_event, wait_time, flag_default]
+                        row = [keyid, wptype, round(entry['position']['latitude'], 6), round(entry['position']['longitude'], 6), entry['position']['height'], entry['orientation'] ['roll'], entry['orientation']['pitch'], entry['orientation']['yaw'], entry['maxSpeed'], max_accel, wp_event, wait_time, flag_default]
                         #print (row)
                         csv_file_writer.writerow(row)
                         keyid += 1
@@ -393,12 +393,13 @@ def generate_mavlink_map_file(filename_csv):
                     file_handler_mav.write('QGC WPL 110\n')
                     first_entry = True
                     for entry in file_reader_csv:
-                        if(first_entry):
-                            file_handler_mav.write(('%s\t1\t0\t16\t0.0\t0.0\t0.0\t0.0\t%.8f\t%.8f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
+                        if(entry and len(entry) > 4):
+                            if(first_entry):
+                                file_handler_mav.write(('%s\t1\t0\t16\t0.0\t0.0\t0.0\t0.0\t%.6f\t%.6f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
 
-                            first_entry = False
-                        else:
-                            file_handler_mav.write(('%s\t0\t3\t16\t0.0\t0.0\t0.0\t0.0\t%.8f\t%.8f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
+                                first_entry = False
+                            else:
+                                file_handler_mav.write(('%s\t0\t3\t16\t0.0\t0.0\t0.0\t0.0\t%.6f\t%.6f\t%.3f\t1\n') %(entry[0], float(entry[2]), float(entry[3]), float(entry[4])))
             file_handler_csv.close()
             file_handler_mav.close()
         except:

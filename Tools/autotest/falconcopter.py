@@ -947,10 +947,10 @@ def read_mission_for_testing(filename):
         file_entry = open(filename, "r")
         mission_points = [ ]
         for line in file_entry:
-            line = line.split(',')
-            #print(line[2], line[3], line[4], line[8])
-            mission_points.append([mavutil.location(float(line[2]),float(line[3]), float(line[4])), float(line[8]), float(line[0])])
-
+            if(not line == ''):
+                line = line.split(',')
+                #print(line[2], line[3], line[4], line[8])
+                mission_points.append([mavutil.location(float(line[2]),float(line[3]), float(line[4])), float(line[8]), float(line[0])]) if (len(line) > 7) else print("Skipping this line")
         return mission_points
     except:
         print("failed to open file")
@@ -1015,7 +1015,7 @@ def run_falcon_test(mavproxy, mav, filename_csv):
             max_timeout = 10
             if(not point[1] == 0 and not point[1] == None):	# max speed cannot be 0 or none
                  max_timeout =  2*math.ceil(get_distance(mav.location(), point[0])/point[1])
-            (status, howClose, elapsedTime) = wait_location_falcon(mav, point[0], accuracy=3, timeout=int(max_timeout))
+            (status, howClose, elapsedTime) = wait_location_falcon(mav, point[0], point[2], accuracy=3, timeout=int(max_timeout))
             summary.append([point, max_timeout, status, howClose, elapsedTime, point[2]])
             if status:
                 print("Waypoint reached")        # TODO: print info about the waypoint, how long it took
@@ -1027,7 +1027,7 @@ def run_falcon_test(mavproxy, mav, filename_csv):
     print("Load mission test complete")
     print ("Test Summary:\n")
     for entry in summary:		# 0:point, 1:maxTimeout, 2:status, 3:howClose, 4:elapsedTime
-        print ("Waypoint #%d. %s: %s   Got within %s meters in %0.1f secs (timeout was %0.1f)" %(entry[5], str(entry[0][0]), ("Success" if entry[2] else "Failure"), str(entry[3]), entry[4], entry[1]))
+        print ("Waypoint #%d. %s: %s   Got within %0.3f meters in %0.1f secs (timeout was %0.1f)" %(entry[5], str(entry[0][0]), ("Success" if entry[2] else "Failure"), entry[3], entry[4], entry[1]))
 
     print("Auto mission completed")
     return test_passed
